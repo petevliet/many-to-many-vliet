@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   resources :companies do
       resources :company_reviews
+      resources :products do
+        resources :product_reviews
+      end
   end
 
   resources :reviews

@@ -11,8 +11,11 @@ class CompanyReviewsController < ApplicationController
       @company_review = CompanyReview.new(company_review_params)
       @company_review.company_id = @company.id
       @company_review.user_id = current_user.id
-      @company_review.save
-      redirect_to companies_path
+      if @company_review.save
+        redirect_to companies_path, notice: 'great your opinion means a bunch'
+      else
+        render :new, notice: 'nah'
+      end
     else
       redirect_to login_path, notice: "Must be logged in to review a company"
     end
@@ -20,7 +23,7 @@ class CompanyReviewsController < ApplicationController
 
   private
   def company_review_params
-    params.require(:company_review).permit(:title, :desciption, :rating)
+    params.require(:company_review).permit(:title, :description, :rating)
   end
-  
+
 end

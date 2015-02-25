@@ -3,7 +3,8 @@
   <h1> Products</h1>
 </div>
 
-<%= link_to "New Product", new_product_path %>
+<%= link_to "New Product", new_product_path %> <br />
+<%= link_to 'All Reviews', reviews_path %>
 <br>
 <br>
 <br>
@@ -17,10 +18,10 @@
       <tbody>
         <% @products.each do |product| %>
           <tr>
-              <td><%=product.name %> </td>
+              <td><%=link_to product.name, product_path(product) %> </td>
               <td>$<%=product.price.round(2) %></td>
-              <td>PUT COMPANY I BELONG TO HERE</td>
-              <td>LINK TO REVIEW PRODUCT HERE</td>
+              <td><%= product.company.name %></td>
+              <td><%= link_to 'Review Product', new_company_product_product_review_path(product.company, product) %></td>
          </tr>
             <% end %>
       </tbody>
